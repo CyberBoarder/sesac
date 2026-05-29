@@ -1,0 +1,37 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# C extensions (LightFM builds)
+*.so
+build/
+lightfm.egg-info/
+/tmp/lightfm-build/
+
+# Virtual environments
+.venv/
+env/
+venv/
+ENV/
+pip-selfcheck.json
+
+# Local databases, caches & telemetry logs
+pgdata-mock/
+imagedefinitions.json
+.k6/
+
+# System & IDE files
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*~
+
+# Secrets & Credentials (EKS/AWS configuration)
+*.pem
+*.kubeconfig
+*creds*
+*credentials*
+secret.txt

@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  # 로컬 Redis 캐시 서버 (추천 Top-5 상품 캐싱용)
+  redis-cache:
+    image: redis:7.2-alpine
+    container_name: local-redis-cache
+    ports:
+      - "6379:6379"
+    restart: always
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  # 로컬 PostgreSQL (Amazon Redshift DW 대용으로 상호작용 매트릭스 적재)
+  redshift-mock:
+    image: postgres:15-alpine
+    container_name: local-redshift-mock
+    environment:
+      POSTGRES_DB: cosmetics_dw
+      POSTGRES_USER: awsuser
+      POSTGRES_PASSWORD: SecurePass123
+    ports:
+      - "5432:5432"
+    restart: always
+    volumes:
+      - pgdata-mock:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U awsuser -d cosmetics_dw"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+volumes:
+  pgdata-mock:

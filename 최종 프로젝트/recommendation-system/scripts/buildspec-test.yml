@@ -1,0 +1,17 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto17
+  pre_build:
+    commands:
+      - echo Initializing test runtime environment...
+      - chmod +x ./gradlew || chmod +x ./mvnw || true
+  build:
+    commands:
+      - echo Running unit tests and code validation...
+      - if [ -f "./gradlew" ]; then ./gradlew test; elif [ -f "./mvnw" ]; then ./mvnw test; else echo "No build wrapper found. Skipping Java tests."; fi
+  post_build:
+    commands:
+      - echo Test phase completed.

@@ -1,0 +1,11 @@
+# Core scientific computation & ML libraries
+numpy>=1.22.0
+scipy>=1.8.0
+
+# Database & cache connectors
+psycopg2-binary>=2.9.0
+redis>=5.0.0
+
+# Data preprocessing & processing
+pandas>=1.4.0
+pyspark>=3.2.0
